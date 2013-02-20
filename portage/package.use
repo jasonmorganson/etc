@@ -1,0 +1,11 @@
+sys-devel/gcc doc
+dev-vcs/git doc
+app-shells/zsh doc
+net-dns/bind-tools doc
+net-misc/openssh X509
+dev-util/cmake vim-syntax
+app-misc/tmux vim-syntax
+app-misc/task vim-syntax
+dev-libs/protobuf vim-syntax
+www-servers/apache threads apache2_mpms_worker
+dev-lang/php apache2 berkdb bzip2 cli crypt ctype curl curlwrappers extif fileinfo filter fpm ftp gd gmp gdbm imap hash iconv ipv6 json mysql nls phar posix readline session simplexml snmp soap sockets spell sqlite3 ssl threads tidy tokenizer truetype unicode xml zlib xmlreader xmlrpc xmlwriter xsl zip
