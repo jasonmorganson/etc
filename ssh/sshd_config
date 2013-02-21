@@ -200,3 +200,15 @@ Subsystem	sftp	/usr/lib64/misc/sftp-server
 #	X11Forwarding no
 #	AllowTcpForwarding no
 #	ForceCommand cvs server
+
+
+#Only allow userin the wheel or admin group to login
+AllowGroups wheel admin
+
+# In those groups only allow the following users
+# Specify which users can login via ssh. Add this line to the bottom of the file.
+# More users can be addded using `space` as a separator, eg. demo anne jenny
+# The @<domainname> is optional but replaces the older AllowHosts directive
+#AllowUsers kn@gentoo.org bs@gentoo.org
+AllowUsers root jason
+
