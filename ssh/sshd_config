@@ -91,93 +91,7 @@
 #      to validate all certificates.
 #VAType none
 
-# Lifetime and size of ephemeral version 1 server key
-#KeyRegenerationInterval 1h
-#ServerKeyBits 1024
 
-# Logging
-# obsoletes QuietMode and FascistLogging
-#SyslogFacility AUTH
-#LogLevel INFO
-
-# Authentication:
-
-#PermitRootLogin yes
-#StrictModes yes
-
-MaxSessions 1   # Maximum number of open sessions permitted per network connection.
-MaxAuthTries 1   # Maximum number of authentication attempts permitted per connection.
-LoginGraceTime 1m   # The server disconnects after this time if the user has not successfully logged in.
-
-#RSAAuthentication yes
-#PubkeyAuthentication yes
-
-# The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
-# but this is overridden so installations will only check .ssh/authorized_keys
-#AuthorizedKeysFile	.ssh/authorized_keys
-
-# For this to work you will also need host keys in /etc/ssh/ssh_known_hosts
-#RhostsRSAAuthentication no
-# similar for protocol version 2
-#HostbasedAuthentication no
-# Change to yes if you don't trust ~/.ssh/known_hosts for
-# RhostsRSAAuthentication and HostbasedAuthentication
-#IgnoreUserKnownHosts no
-# Don't read the user's ~/.rhosts and ~/.shosts files
-#IgnoreRhosts yes
-
-# To disable tunneled clear text passwords, change to no here!
-PasswordAuthentication no
-#PermitEmptyPasswords no
-
-# Change to no to disable s/key passwords
-#ChallengeResponseAuthentication yes
-
-# Kerberos options
-#KerberosAuthentication no
-#KerberosOrLocalPasswd yes
-#KerberosTicketCleanup yes
-#KerberosGetAFSToken no
-
-# GSSAPI options
-#GSSAPIAuthentication no
-#GSSAPICleanupCredentials yes
-#GSSAPIStrictAcceptorCheck yes
-
-# Set this to 'yes' to enable PAM authentication, account processing, 
-# and session processing. If this is enabled, PAM authentication will 
-# be allowed through the ChallengeResponseAuthentication and
-# PasswordAuthentication.  Depending on your PAM configuration,
-# PAM authentication via ChallengeResponseAuthentication may bypass
-# the setting of "PermitRootLogin without-password".
-# If you just want the PAM account and session checks to run without
-# PAM authentication, then enable this but set PasswordAuthentication
-# and ChallengeResponseAuthentication to 'no'.
-UsePAM yes
-
-#AllowAgentForwarding yes
-#AllowTcpForwarding yes
-#GatewayPorts no
-#X11Forwarding no
-#X11DisplayOffset 10
-#X11UseLocalhost yes
-PrintMotd no
-PrintLastLog no
-#TCPKeepAlive yes
-#UseLogin no
-#UsePrivilegeSeparation yes
-#PermitUserEnvironment no
-#Compression delayed
-#ClientAliveInterval 0
-#ClientAliveCountMax 3
-#UseDNS yes
-#PidFile /var/run/sshd.pid
-#MaxStartups 10
-#PermitTunnel no
-#ChrootDirectory none
-
-# no default banner path
-#Banner none
 
 # override default of no subsystems
 Subsystem	sftp	/usr/lib64/misc/sftp-server
@@ -196,20 +110,106 @@ Subsystem	sftp	/usr/lib64/misc/sftp-server
 #HPNBufferSize 2048
 
 
-# Example of overriding settings on a per-user basis
-#Match User anoncvs
-#	X11Forwarding no
-#	AllowTcpForwarding no
-#	ForceCommand cvs server
+
+# Kerberos options
+#KerberosOrLocalPasswd yes
+#KerberosTicketCleanup yes
+#KerberosGetAFSToken no
+
+# GSSAPI options
+#GSSAPIAuthentication no
+#GSSAPICleanupCredentials yes
+#GSSAPIStrictAcceptorCheck yes
 
 
-#Only allow userin the wheel or admin group to login
+
+# Lifetime and size of ephemeral version 1 server key
+#KeyRegenerationInterval 1h
+#ServerKeyBits 1024
+
+# Logging
+# obsoletes QuietMode and FascistLogging
+#SyslogFacility AUTH
+#LogLevel INFO
+
+
+# no default banner path
+#Banner none
+
+PrintMotd no
+PrintLastLog no
+
+#AllowAgentForwarding yes
+#AllowTcpForwarding yes
+#GatewayPorts no
+#X11Forwarding no
+#X11DisplayOffset 10
+#X11UseLocalhost yes
+#TCPKeepAlive yes
+#UseLogin no
+#UsePrivilegeSeparation yes
+#PermitUserEnvironment no
+#Compression delayed
+#ClientAliveInterval 0
+#ClientAliveCountMax 3
+#PermitTunnel no
+#ChrootDirectory none
+PermitRootLogin no
+
+
+# Specifies whether sshd(8) should look up the remote host name and check 
+# that the resolved host name for the remote IP address maps back to the
+# very same IP address.  
+UseDNS yes
+
+# Set this to 'yes' to enable PAM authentication, account processing, 
+# and session processing. If this is enabled, PAM authentication will 
+# be allowed through the ChallengeResponseAuthentication and
+# PasswordAuthentication.  Depending on your PAM configuration,
+# PAM authentication via ChallengeResponseAuthentication may bypass
+# the setting of "PermitRootLogin without-password".
+# If you just want the PAM account and session checks to run without
+# PAM authentication, then enable this but set PasswordAuthentication
+# and ChallengeResponseAuthentication to 'no'.
+UsePAM yes
+
+
+# Authentication:
+RSAAuthentication yes
+PermitEmptyPasswords no
+PubkeyAuthentication yes
+PasswordAuthentication no
+#KerberosAuthentication no
+#RhostsRSAAuthentication no
+#HostbasedAuthentication no
+ChallengeResponseAuthentication yes
+
+# Connection:
+MaxStartups 10   # Maximum number of concurrent unauthenticated connections to the SSH daemon.
+MaxSessions 1   # Maximum number of open sessions permitted per network connection.
+MaxAuthTries 1   # Maximum number of authentication attempts permitted per connection.
+LoginGraceTime 1m   # The server disconnects after this time if the user has not successfully logged in.
+
+
+
+# The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
+# but this is overridden so installations will only check .ssh/authorized_keys
+#AuthorizedKeysFile	.ssh/authorized_keys
+
+
+
+# Only allow users in the wheel or admin group to login.
 AllowGroups wheel admin
 
-# In those groups only allow the following users
+# In those groups only allow the following users:
 # Specify which users can login via ssh. Add this line to the bottom of the file.
 # More users can be addded using `space` as a separator, eg. demo anne jenny
 # The @<domainname> is optional but replaces the older AllowHosts directive
 #AllowUsers kn@gentoo.org bs@gentoo.org
 AllowUsers root jason
 
+# Example of overriding settings on a per-user basis
+#Match User anoncvs
+#	X11Forwarding no
+#	AllowTcpForwarding no
+#	ForceCommand cvs server
