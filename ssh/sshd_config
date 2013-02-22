@@ -102,11 +102,12 @@
 
 # Authentication:
 
-#LoginGraceTime 2m
 #PermitRootLogin yes
 #StrictModes yes
-#MaxAuthTries 6
-#MaxSessions 10
+
+MaxSessions 1   # Maximum number of open sessions permitted per network connection.
+MaxAuthTries 1   # Maximum number of authentication attempts permitted per connection.
+LoginGraceTime 1m   # The server disconnects after this time if the user has not successfully logged in.
 
 #RSAAuthentication yes
 #PubkeyAuthentication yes
