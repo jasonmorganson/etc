@@ -1,0 +1,60 @@
+# Fail2Ban jail specifications file
+#
+# Comments: use '#' for comment lines and ';' for inline comments
+#
+#
+
+# The DEFAULT allows a global definition of the options. They can be overridden
+# in each jail afterwards.
+
+[DEFAULT]
+
+# "bantime" is the number of seconds that a host is banned.
+bantime  = 86400 ; One day
+
+# A host is banned if it has generated "maxretry" during the last "findtime"
+# seconds.
+findtime  = 600 ; 10 Minutes
+
+# "maxretry" is the number of failures before a host get banned.
+maxretry = 3
+
+
+
+# This jail corresponds to the standard configuration in Fail2ban 0.6.
+# The mail-whois action send a notification e-mail with a whois request
+# in the body.
+
+[ssh-iptables]
+
+enabled  = true
+filter   = sshd
+action   = iptables[name=SSH, port=ssh, protocol=tcp]
+logpath  = /var/log/auth.log
+
+# Here we use TCP-Wrappers instead of Netfilter/Iptables. "ignoreregex" is
+# used to avoid banning the user "myuser".
+
+[ssh-tcpwrapper]
+
+enabled     = true
+filter      = sshd
+action      = hostsdeny
+logpath     = /var/log/auth.log
+
+
+# Jail for more extended banning of persistent abusers
+# !!! WARNING !!!
+#   Make sure that your loglevel specified in fail2ban.conf/.local
+#   is not at DEBUG level -- which might then cause fail2ban to fall into
+#   an infinite loop constantly feeding itself with non-informative lines
+
+[recidive]
+
+enabled  = false
+filter   = recidive
+logpath  = /var/log/fail2ban.log
+action   = iptables-allports[name=recidive]
+bantime  = 604800  ; 1 week
+findtime = 86400   ; 1 day
+maxretry = 5
