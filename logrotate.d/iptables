@@ -1,0 +1,9 @@
+/var/log/ulogd.syslogemu {
+    daily
+    rotate 7
+    missingok
+    compress
+    postrotate
+        /etc/init.d/iptables reload > /dev/null 2>&1 || true
+    endscript
+}

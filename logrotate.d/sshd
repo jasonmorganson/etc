@@ -1,0 +1,9 @@
+/var/log/auth.log {
+    daily
+    rotate 7
+    missingok
+    compress
+    postrotate
+        /etc/init.d/sshd reload > /dev/null 2>&1 || true
+    endscript
+}
