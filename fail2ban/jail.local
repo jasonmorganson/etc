@@ -21,17 +21,6 @@ maxretry = 3
 
 
 
-# This jail corresponds to the standard configuration in Fail2ban 0.6.
-# The mail-whois action send a notification e-mail with a whois request
-# in the body.
-
-[ssh-iptables]
-
-enabled  = true
-filter   = sshd
-action   = iptables[name=SSH, port=ssh, protocol=tcp]
-logpath  = /var/log/auth.log
-
 # Here we use TCP-Wrappers instead of Netfilter/Iptables. "ignoreregex" is
 # used to avoid banning the user "myuser".
 
@@ -41,6 +30,14 @@ enabled     = true
 filter      = sshd
 action      = hostsdeny
 logpath     = /var/log/auth.log
+
+# Use an ipset to add blacklisted IPs
+[ssh-ipset]
+
+enabled  = true
+filter   = sshd
+action   = ipset
+logpath  = /var/log/auth.log
 
 
 # Jail for more extended banning of persistent abusers
