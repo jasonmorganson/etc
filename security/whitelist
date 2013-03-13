@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Resolve remote host's IP address from address given to PAM
+HOST=`dig +short $PAM_RHOST`
+
+# Add the remote host's IP address to the whitelist ipset
+ipset add whitelist "$HOST"
+
