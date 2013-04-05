@@ -1,4 +1,5 @@
 auth       include	system-remote-login
+auth       required     pam_google_authenticator.so
 auth       required     pam_abl.so config=/etc/security/pam_abl.conf
 auth       optional	pam_exec.so quiet /etc/security/whitelist
 account    include	system-remote-login
