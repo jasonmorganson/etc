@@ -3,3 +3,6 @@ app-shells/zsh
 net-misc/openssh
 net-libs/ldns
 net-libs/nodejs
+=virtual/python-json-0
+#required by wkhtmltopdf (argument)
+=media-gfx/wkhtmltopdf-0.11.0_rc1 ~amd64
