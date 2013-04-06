@@ -102,10 +102,20 @@
 
 # Authentication:
 
+# The server disconnects after this time if the user has not successfully logged in.
 LoginGraceTime 1m
+
+# Deny root login
 PermitRootLogin no
+
+# Specifies whether sshd(8) should check file modes and ownership
+# of the user's files and home directory before accepting login.
 #StrictModes yes
+
+# Maximum number of authentication attempts permitted per connection. 
 MaxAuthTries 1 
+
+# Maximum number of open sessions permitted per network interface.
 MaxSessions 10
 
 #RSAAuthentication yes
