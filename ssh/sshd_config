@@ -118,6 +118,10 @@ MaxAuthTries 1
 # Maximum number of open sessions permitted per network interface.
 MaxSessions 10
 
+AllowGroups wheel admin
+
+AllowUsers jason
+
 #RSAAuthentication yes
 #PubkeyAuthentication yes
 
