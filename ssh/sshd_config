@@ -117,6 +117,9 @@
 
 #AuthorizedPrincipalsFile none
 
+#AuthorizedKeysCommand none
+#AuthorizedKeysCommandUser nobody
+
 # For this to work you will also need host keys in /etc/ssh/ssh_known_hosts
 #RhostsRSAAuthentication no
 # similar for protocol version 2
@@ -145,12 +148,6 @@ PasswordAuthentication no
 #GSSAPICleanupCredentials yes
 #GSSAPIStrictAcceptorCheck yes
 
-
-# Specifies whether sshd(8) should look up the remote host name and check 
-# that the resolved host name for the remote IP address maps back to the
-# very same IP address.  
-UseDNS yes
-
 # Set this to 'yes' to enable PAM authentication, account processing, 
 # and session processing. If this is enabled, PAM authentication will 
 # be allowed through the ChallengeResponseAuthentication and
@@ -161,47 +158,6 @@ UseDNS yes
 # PAM authentication, then enable this but set PasswordAuthentication
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM yes
-
-
-# Authentication:
-RSAAuthentication yes
-PermitEmptyPasswords no
-PubkeyAuthentication yes
-PasswordAuthentication no
-#KerberosAuthentication no
-#RhostsRSAAuthentication no
-#HostbasedAuthentication no
-ChallengeResponseAuthentication yes
-
-# Connection:
-MaxStartups 10   # Maximum number of concurrent unauthenticated connections to the SSH daemon.
-MaxSessions 1   # Maximum number of open sessions permitted per network connection.
-MaxAuthTries 1   # Maximum number of authentication attempts permitted per connection.
-LoginGraceTime 1m   # The server disconnects after this time if the user has not successfully logged in.
-
-
-
-# The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
-# but this is overridden so installations will only check .ssh/authorized_keys
-#AuthorizedKeysFile	.ssh/authorized_keys
-
-
-
-# Only allow users in the wheel or admin group to login.
-AllowGroups wheel admin
-
-# In those groups only allow the following users:
-# Specify which users can login via ssh. Add this line to the bottom of the file.
-# More users can be addded using `space` as a separator, eg. demo anne jenny
-# The @<domainname> is optional but replaces the older AllowHosts directive
-#AllowUsers kn@gentoo.org bs@gentoo.org
-AllowUsers root jason
-
-# Example of overriding settings on a per-user basis
-#Match User anoncvs
-#	X11Forwarding no
-#	AllowTcpForwarding no
-#	ForceCommand cvs server
 
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes
@@ -220,7 +176,7 @@ UsePrivilegeSeparation sandbox		# Default for new installations.
 #ClientAliveCountMax 3
 #UseDNS yes
 #PidFile /var/run/sshd.pid
-#MaxStartups 10
+#MaxStartups 10:30:100
 #PermitTunnel no
 #ChrootDirectory none
 #VersionAddendum none
@@ -243,7 +199,6 @@ Subsystem	sftp	/usr/lib64/misc/sftp-server
 
 # buffer size for hpn to non-hpn connections
 #HPNBufferSize 2048
-
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs
