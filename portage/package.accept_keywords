@@ -1,6 +1,6 @@
 app-admin/syslog-ng
 app-shells/zsh
-net-misc/openssh
+net-misc/openssh **
 net-libs/ldns
 net-libs/nodejs
 =virtual/python-json-0
