@@ -122,6 +122,8 @@ AllowGroups wheel admin
 
 AllowUsers jason
 
+AuthenticationMethods publickey keyboard-interactive
+
 #RSAAuthentication yes
 #PubkeyAuthentication yes
 
