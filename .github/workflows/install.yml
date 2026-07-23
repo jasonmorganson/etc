@@ -35,4 +35,5 @@ jobs:
           fish_bin=$("$HOME/.local/bin/mise" which fish)
           "$fish_bin" -ic 'test "$MISE_SHELL" = fish; and test "$XDG_CONFIG_HOME" = "$HOME/.config"'
           nu_bin=$("$HOME/.local/bin/mise" which nu)
-          XDG_CONFIG_HOME="$HOME/.config" "$nu_bin" -i -c 'if $env.MISE_SHELL != "nu" or $env.XDG_CONFIG_HOME != ($env.HOME | path join .config) { exit 1 }'
+          XDG_CONFIG_HOME="$HOME/.config" "$nu_bin" --config "$HOME/.config/nushell/autoload/00-mise.nu" -c \
+            'if $env.MISE_SHELL != "nu" or $env.XDG_CONFIG_HOME != ($env.HOME | path join .config) { exit 1 }'
