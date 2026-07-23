@@ -1,0 +1,35 @@
+min_version = "2026.7.7"
+
+[settings]
+locked = true
+
+[tools]
+"aqua:fish-shell/fish-shell" = "latest"
+"aqua:nushell/nushell" = "latest"
+"github:romkatv/zsh-bin" = { version = "v6.1.1", bin = "zsh" }
+
+[env]
+XDG_CACHE_HOME = "{{ env.HOME }}/.cache"
+XDG_CONFIG_HOME = "{{ env.HOME }}/.config"
+XDG_BIN_HOME = "{{ env.HOME }}/.local/bin"
+XDG_DATA_HOME = "{{ env.HOME }}/.local/share"
+XDG_STATE_HOME = "{{ env.HOME }}/.local/state"
+_.path = ["{{ env.HOME }}/.local/bin"]
+
+[bootstrap.mise_shell_activate]
+zsh = true
+bash = true
+fish = true
+
+[dotfiles]
+"~/.config/mise/conf.d/00-etc.toml" = { source = "~/.local/share/etc/home/.config/mise/conf.d/00-etc.toml", mode = "symlink" }
+"~/.config/mise/mise.lock" = { source = "~/.local/share/etc/home/.config/mise/mise.lock", mode = "symlink" }
+"~/.config/nushell/autoload/00-mise.nu" = { source = "~/.local/share/etc/home/.config/nushell/autoload/00-mise.nu", mode = "copy" }
+"~/.bash_profile/mise-path" = { block = 'export PATH="$HOME/.local/bin:$PATH"' }
+"~/.bashrc/mise-path" = { block = 'export PATH="$HOME/.local/bin:$PATH"' }
+"~/.zprofile/mise-path" = { block = 'export PATH="$HOME/.local/bin:$PATH"' }
+"~/.zshrc/mise-path" = { block = 'export PATH="$HOME/.local/bin:$PATH"' }
+"~/.config/fish/config.fish/mise-path" = { block = 'fish_add_path --global --move "$HOME/.local/bin"' }
+
+[bootstrap.hooks.final]
+run = "command -v bash >/dev/null && mise which zsh >/dev/null && mise which fish >/dev/null && mise which nu >/dev/null"
