@@ -1,0 +1,33 @@
+name: Test install
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: source
+      - name: Create canonical checkout
+        run: |
+          mkdir -p "$HOME/.local/share"
+          git clone "$GITHUB_WORKSPACE/source" "$HOME/.local/share/etc"
+      - name: Install
+        run: "$HOME/.local/share/etc/install.sh"
+      - name: Reinstall
+        run: "$HOME/.local/share/etc/install.sh"
+      - name: Validate
+        run: |
+          test ! -e /etc/mise
+          "$HOME/.local/bin/mise" bootstrap status --missing
+          bash -lc 'command -v mise'
+          "$HOME/.local/bin/mise" exec -- zsh -lc 'command -v mise'
+          "$HOME/.local/bin/mise" exec -- fish -lc 'command -v mise'
+          "$HOME/.local/bin/mise" exec -- nu -c 'which mise | is-not-empty'
