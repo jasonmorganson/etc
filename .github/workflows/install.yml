@@ -6,6 +6,8 @@ on:
 
 jobs:
   install:
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
     strategy:
       fail-fast: false
       matrix:
