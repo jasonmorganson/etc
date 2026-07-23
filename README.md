@@ -12,7 +12,7 @@ configuration without copying this core.
 Clone to the canonical checkout and run the installer:
 
 ```sh
-git clone https://github.com/jasonmorganson/etc.git ~/.local/share/etc
+git clone --branch v1.0.0 https://github.com/jasonmorganson/etc.git ~/.local/share/etc
 ~/.local/share/etc/install.sh
 ```
 
