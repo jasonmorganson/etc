@@ -26,6 +26,7 @@ jobs:
       - name: Validate
         run: |
           test ! -e /etc/mise
+          test "$(readlink "$HOME/.config/mise/mise.lock")" = "$HOME/.local/share/etc/home/.config/mise/mise.lock"
           "$HOME/.local/bin/mise" bootstrap status --missing
           bash -lc 'command -v mise'
           "$HOME/.local/bin/mise" exec -- zsh -lc 'command -v mise'

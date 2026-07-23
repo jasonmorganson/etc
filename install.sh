@@ -18,6 +18,13 @@ fi
 PATH="$HOME/.local/bin:$PATH"
 export PATH
 
+lock_target=$HOME/.config/mise/mise.lock
+lock_source=$repo/home/.config/mise/mise.lock
+mkdir -p "$(dirname "$lock_target")"
+if [ ! -e "$lock_target" ] && [ ! -L "$lock_target" ]; then
+    ln -s "$lock_source" "$lock_target"
+fi
+
 MISE_CONFIG_DIR="$repo/home/.config/mise" \
 MISE_DOTFILES_ROOT="$repo/home" \
 "$mise_bin" bootstrap --yes --force-dotfiles --skip task

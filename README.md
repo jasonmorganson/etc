@@ -19,9 +19,9 @@ git clone https://github.com/jasonmorganson/etc.git ~/.local/share/etc
 Everything is installed below `$HOME`. The installer does not use `sudo` or
 write to `/etc`.
 
-The repository lockfile remains source-local and is used by the installer.
-Higher-precedence user dotfiles can install their own merged global lockfile
-without competing with the core for the same target.
+The installer links the repository lockfile globally only when no global
+lockfile exists. Higher-precedence user dotfiles can replace that target with
+their own merged lockfile; the core config does not compete for its ownership.
 
 ## Includes
 
