@@ -29,6 +29,10 @@ jobs:
           test "$(readlink "$HOME/.config/mise/mise.lock")" = "$HOME/.local/share/etc/home/.config/mise/mise.lock"
           "$HOME/.local/bin/mise" bootstrap status --missing
           bash -lc 'command -v mise'
-          "$HOME/.local/bin/mise" exec -- zsh -lc 'command -v mise'
-          "$HOME/.local/bin/mise" exec -- fish -lc 'command -v mise'
-          "$HOME/.local/bin/mise" exec -- nu -c 'which mise | is-not-empty'
+          bash -ic 'test "$MISE_SHELL" = bash && test "$XDG_CONFIG_HOME" = "$HOME/.config"'
+          zsh_bin=$("$HOME/.local/bin/mise" which zsh)
+          "$zsh_bin" -ic 'test "$MISE_SHELL" = zsh && test "$XDG_CONFIG_HOME" = "$HOME/.config"'
+          fish_bin=$("$HOME/.local/bin/mise" which fish)
+          "$fish_bin" -ic 'test "$MISE_SHELL" = fish; and test "$XDG_CONFIG_HOME" = "$HOME/.config"'
+          nu_bin=$("$HOME/.local/bin/mise" which nu)
+          XDG_CONFIG_HOME="$HOME/.config" "$nu_bin" -i -c 'if $env.MISE_SHELL != "nu" or $env.XDG_CONFIG_HOME != ($env.HOME | path join .config) { exit 1 }'
