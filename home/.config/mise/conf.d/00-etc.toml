@@ -23,7 +23,6 @@ fish = true
 
 [dotfiles]
 "~/.config/mise/conf.d/00-etc.toml" = { source = "~/.local/share/etc/home/.config/mise/conf.d/00-etc.toml", mode = "symlink" }
-"~/.config/mise/mise.lock" = { source = "~/.local/share/etc/home/.config/mise/mise.lock", mode = "symlink" }
 "~/.config/nushell/autoload/00-mise.nu" = { source = "~/.local/share/etc/home/.config/nushell/autoload/00-mise.nu", mode = "copy" }
 "~/.bash_profile/mise-path" = { block = 'export PATH="$HOME/.local/bin:$PATH"' }
 "~/.bashrc/mise-path" = { block = 'export PATH="$HOME/.local/bin:$PATH"' }
