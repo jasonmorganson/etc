@@ -19,6 +19,10 @@ git clone https://github.com/jasonmorganson/etc.git ~/.local/share/etc
 Everything is installed below `$HOME`. The installer does not use `sudo` or
 write to `/etc`.
 
+The repository lockfile remains source-local and is used by the installer.
+Higher-precedence user dotfiles can install their own merged global lockfile
+without competing with the core for the same target.
+
 ## Includes
 
 - XDG config, cache, data, state, and user-bin paths
