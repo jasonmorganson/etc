@@ -20,4 +20,4 @@ export PATH
 
 MISE_CONFIG_DIR="$repo/home/.config/mise" \
 MISE_DOTFILES_ROOT="$repo/home" \
-"$mise_bin" bootstrap --yes --force-dotfiles
+"$mise_bin" bootstrap --yes --force-dotfiles --skip task
